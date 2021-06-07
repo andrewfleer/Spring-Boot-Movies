@@ -8,7 +8,7 @@ public interface MovieService {
 
     List<MovieDTO> listAllMovies(Integer pageNo);
 
-    List<MovieDTO> getMoviesByYear(Integer year, Integer pageNo) throws Exception;
+    List<MovieDTO> getMoviesByYear(Integer year, Integer pageNo);
 
     List<MovieDTO> getMoviesByGenre(String genre, Integer page);
 }

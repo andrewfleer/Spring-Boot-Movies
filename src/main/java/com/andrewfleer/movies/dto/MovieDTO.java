@@ -12,13 +12,13 @@ public class MovieDTO {
     private String imdbId;
     private String title;
     private String overview;
-    private Set<ProductionCompany> productionCompanies;
+    private Set<ProductionCompanyDTO> productionCompanies;
     private String releaseDate;
     private String budget;
     private String revenue;
     private Integer runtime;
     private String language;
-    private Set<Genre> genres;
+    private Set<GenreDTO> genres;
     private String status;
 
     public Integer getMovieId() {
@@ -53,11 +53,11 @@ public class MovieDTO {
         this.overview = overview;
     }
 
-    public Set<ProductionCompany> getProductionCompanies() {
+    public Set<ProductionCompanyDTO> getProductionCompanies() {
         return productionCompanies;
     }
 
-    public void setProductionCompanies(Set<ProductionCompany> productionCompanies) {
+    public void setProductionCompanies(Set<ProductionCompanyDTO> productionCompanies) {
         this.productionCompanies = productionCompanies;
     }
 
@@ -101,11 +101,11 @@ public class MovieDTO {
         this.language = language;
     }
 
-    public Set<Genre> getGenres() {
+    public Set<GenreDTO> getGenres() {
         return genres;
     }
 
-    public void setGenres(Set<Genre> genres) {
+    public void setGenres(Set<GenreDTO> genres) {
         this.genres = genres;
     }
 

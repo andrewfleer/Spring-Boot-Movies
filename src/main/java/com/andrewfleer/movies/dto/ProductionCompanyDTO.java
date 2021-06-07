@@ -3,7 +3,7 @@ package com.andrewfleer.movies.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Genre {
+public class ProductionCompanyDTO {
     private int id;
     private String name;
 

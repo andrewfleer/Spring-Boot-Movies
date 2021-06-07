@@ -1,6 +1,6 @@
 package com.andrewfleer.movies.service.impl;
 
-import com.andrewfleer.movies.dto.Genre;
+import com.andrewfleer.movies.dto.GenreDTO;
 import com.andrewfleer.movies.dto.MovieDTO;
 import com.andrewfleer.movies.entity.Movie;
 import com.andrewfleer.movies.repository.MovieRepository;
@@ -13,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -28,8 +26,12 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private ObjectMapper mapper;
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+    /**
+     * Returns all movies in a paged set. The page size is currently a static value.
+     * Future enhancements could include letting the user set the page size in their request.
+     * @param pageNo - Which page number to return. Default is 0
+     * @return - Return a list of Movie DTOs
+     */
     @Override
     public List<MovieDTO> listAllMovies(Integer pageNo) {
         Pageable paging = PageRequest.of(pageNo, PAGE_SIZE);
@@ -42,8 +44,19 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
+    /**
+     * Returns a list of all movies for a given year in a paged set. The page size is currently a static value.
+     * Future enhancements could include:
+     *      - Letting the user set the page size in their request
+     *      - Letting the user choose if they want to sort ascending or descending
+     *      - Changing the year to be a calendar object instead of a String.
+     *           - This could already be achievable, but I was struggling with SQLite.
+     * @param year - The year the movie came out
+     * @param pageNo - Which page number to return. Default is 0
+     * @return - A list of Movie DTOs
+     */
     @Override
-    public List<MovieDTO> getMoviesByYear(Integer year, Integer pageNo) throws Exception {
+    public List<MovieDTO> getMoviesByYear(Integer year, Integer pageNo) {
         Pageable paging = PageRequest.of(pageNo, PAGE_SIZE, Sort.by("releaseDate").descending());
         String yearParam = year + "-%";
         Page<Movie> pagedResult = movieRepository.findAllByYear(paging, yearParam);
@@ -55,6 +68,15 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
+    /**
+     * Returns a list of all movies for a given genre in a paged set. The page size is currently a static value.
+     * Future enhancements could include:
+     *      - Letting the user set the page size in their request
+     *      - Letting the user select multiple genres
+     * @param genre - A genre of movie
+     * @param pageNo - Which page number to return. Default is 0
+     * @return - A list of Movie DTOs
+     */
     @Override
     public List<MovieDTO> getMoviesByGenre(String genre, Integer pageNo) {
         Pageable paging = PageRequest.of(pageNo, PAGE_SIZE);
@@ -69,6 +91,11 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
+    /**
+     * Converts the entities to a DTO. It's cleaner this was and helps preserve data integrity.
+     * @param content - A list of movie entities
+     * @return - A list of DTOs
+     */
     private List<MovieDTO> convertEntityToDTO(List<Movie> content) {
         List<MovieDTO> returnList = new ArrayList<MovieDTO>();
         for (Movie entity : content) {
@@ -79,7 +106,8 @@ public class MovieServiceImpl implements MovieService {
             dto.setBudget("$" + entity.getBudget().toString());
 
             try {
-                Set<Genre> genres = mapper.readValue(entity.getGenres(), Set.class);
+                // Convert the genres String to a JSON object.
+                Set<GenreDTO> genres = mapper.readValue(entity.getGenres(), Set.class);
                 dto.setGenres(genres);
             } catch (Exception e) {
                 e.printStackTrace();
