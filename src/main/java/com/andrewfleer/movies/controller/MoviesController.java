@@ -1,6 +1,7 @@
 package com.andrewfleer.movies.controller;
 
 import com.andrewfleer.movies.dto.MovieDTO;
+import com.andrewfleer.movies.entity.rating.Rating;
 import com.andrewfleer.movies.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

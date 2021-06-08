@@ -1,10 +1,10 @@
-package com.andrewfleer.movies.entity;
+package com.andrewfleer.movies.entity.movie;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.andrewfleer.movies.entity.rating.Rating;
+
+import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Set;
 
 @Entity
 @Table(name="movies")
@@ -37,6 +37,9 @@ public class Movie {
     private String genres;
 
     private String status;
+
+    @OneToMany(mappedBy="movieId")
+    private Set<Rating> ratings;
 
     public Movie() {
 
@@ -136,5 +139,13 @@ public class Movie {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

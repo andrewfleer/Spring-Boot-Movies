@@ -1,6 +1,7 @@
 package com.andrewfleer.movies.service;
 
 import com.andrewfleer.movies.dto.MovieDTO;
+import com.andrewfleer.movies.entity.rating.Rating;
 
 import java.util.List;
 

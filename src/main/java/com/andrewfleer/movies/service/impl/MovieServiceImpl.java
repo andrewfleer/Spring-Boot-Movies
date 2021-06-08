@@ -2,8 +2,10 @@ package com.andrewfleer.movies.service.impl;
 
 import com.andrewfleer.movies.dto.GenreDTO;
 import com.andrewfleer.movies.dto.MovieDTO;
-import com.andrewfleer.movies.entity.Movie;
-import com.andrewfleer.movies.repository.MovieRepository;
+import com.andrewfleer.movies.entity.movie.Movie;
+import com.andrewfleer.movies.entity.rating.Rating;
+import com.andrewfleer.movies.repository.movie.MovieRepository;
+import com.andrewfleer.movies.repository.rating.RatingRepository;
 import com.andrewfleer.movies.service.MovieService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class MovieServiceImpl implements MovieService {
     private static final int PAGE_SIZE = 50;
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private RatingRepository ratingRepository;
 
     @Autowired
     private ObjectMapper mapper;

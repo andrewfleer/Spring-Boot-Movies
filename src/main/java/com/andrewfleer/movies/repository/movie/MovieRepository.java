@@ -1,6 +1,6 @@
-package com.andrewfleer.movies.repository;
+package com.andrewfleer.movies.repository.movie;
 
-import com.andrewfleer.movies.entity.Movie;
+import com.andrewfleer.movies.entity.movie.Movie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
