@@ -1,6 +1,7 @@
 package com.andrewfleer.movies;
 
 import com.andrewfleer.movies.dto.MovieDTO;
+import com.andrewfleer.movies.dto.MovieDetailsDTO;
 import com.andrewfleer.movies.service.MovieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,18 @@ class MoviesApplicationTests {
 
         int zero_movies = 0;
         assertThat(movies).hasSize(zero_movies);
+    }
+
+    @Test
+    public void should_find_movie_by_id() {
+        MovieDetailsDTO movie = movieService.getMovieDetails(2, null);
+
+        assertThat(movie).isNotNull();
+    }
+
+    @Test
+    public void should_find_movie_by_title() {
+        MovieDetailsDTO movie = movieService.getMovieDetails(null, "ARIEL");
+        assertThat(movie).isNotNull();
     }
 }

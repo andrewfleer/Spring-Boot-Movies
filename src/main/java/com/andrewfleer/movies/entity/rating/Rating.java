@@ -22,10 +22,6 @@ public class Rating {
     @Column(columnDefinition = "INTEGER")
     private Long timestamp;
 
-    @ManyToOne
-    @JoinColumn(name="movieId")
-    private Movie movie;
-
     public Integer getRatingId() {
         return ratingId;
     }
@@ -64,13 +60,5 @@ public class Rating {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
     }
 }

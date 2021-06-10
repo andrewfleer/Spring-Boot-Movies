@@ -38,9 +38,6 @@ public class Movie {
 
     private String status;
 
-    @OneToMany(mappedBy="movieId")
-    private Set<Rating> ratings;
-
     public Movie() {
 
     }
@@ -139,13 +136,5 @@ public class Movie {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Set<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
     }
 }

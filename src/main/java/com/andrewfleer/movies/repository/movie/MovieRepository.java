@@ -8,12 +8,17 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Integer> {
-    @Query("select m from Movie m where m.releaseDate like :yearParam")
-    Page<Movie> findAllByYear(Pageable paging, @Param("yearParam") String yearParam);
+    @Query("SELECT m FROM Movie m WHERE m.releaseDate LIKE :year")
+    Page<Movie> findAllByYear(Pageable paging, @Param("year") String year);
 
-    @Query("select m from Movie m where m.genres like :genre")
+    @Query("SELECT m FROM Movie m WHERE m.genres LIKE :genre")
     Page<Movie> findAllByGenre(Pageable paging, @Param("genre") String genre);
+
+    @Query("SELECT m FROM Movie m WHERE UPPER(m.title) = :title")
+    Optional<Movie> findByTitle(@Param("title") String title);
 }
